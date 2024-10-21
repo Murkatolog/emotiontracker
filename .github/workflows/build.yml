@@ -12,32 +12,30 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # Updated to the latest version
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5  # Updated to the latest version
         with:
           python-version: '3.10'
 
-      - name: Set up virtual environment
+      - name: Install dependencies
         run: |
-          python3 -m venv myenv
-          source myenv/bin/activate
-          pip install --upgrade pip setuptools cython
-          pip install buildozer python-for-android
+          sudo apt update
+          sudo apt install -y openjdk-11-jdk unzip zip wget
+          pip3 install --upgrade pip setuptools cython
+          sudo pip3 install --upgrade buildozer python-for-android
 
-      - name: Verify Buildozer Installation
+      - name: Clean Buildozer Cache
         run: |
-          source myenv/bin/activate
-          buildozer --version
+          buildozer android clean
 
       - name: Build APK
         run: |
-          source myenv/bin/activate
-          buildozer android debug --verbose
+          buildozer android debug --verbose --accept-sdk-license
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: my-app.apk
           path: bin/*.apk
