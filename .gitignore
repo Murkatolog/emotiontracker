@@ -1,1 +1,13 @@
 .buildozer/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.env
+env/
+venv/
+.idea/
+*.iml
+*.log
