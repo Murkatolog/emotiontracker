@@ -9,4 +9,5 @@ requirements = python3,kivy,sqlite3,requests  # Укажите все необх
 orientation = portrait
 fullscreen = 0
 android.permissions = INTERNET  # Добавьте необходимые разрешения
+android.accept_sdk_license = True
 
