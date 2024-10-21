@@ -1,0 +1,115 @@
+<StatisticItem>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: self.minimum_height
+    spacing: '5dp'
+    padding: '5dp'
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: '40dp'
+        spacing: '10dp'
+
+        Label:
+            text: root.date
+            size_hint_x: 0.3
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+            color: (0, 0, 0, 1)  # Чёрный цвет текста
+
+        Label:
+            text: root.emotion_name
+            size_hint_x: 0.3
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+            color: (0, 0, 0, 1)
+
+        Label:
+            text: root.count
+            size_hint_x: 0.2
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+            color: (0, 0, 0, 1)
+
+        Label:
+            text: root.duration
+            size_hint_x: 0.2
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+            color: (0, 0, 0, 1)
+
+    Button:
+        text: 'Подробнее'
+        size_hint_y: None
+        height: '30dp'
+        on_press: root.toggle_reasons(self)
+
+BoxLayout:
+    orientation: 'vertical'
+    padding: '10dp'
+    spacing: '10dp'
+
+    # Поле ввода даты и кнопка выбора даты
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: '40dp'
+        spacing: '10dp'
+
+        Label:
+            text: 'Дата:'
+            size_hint_x: None
+            width: '50dp'
+            halign: 'right'
+            valign: 'middle'
+            text_size: self.size
+
+        TextInput:
+            id: date_input
+            text: app.current_date
+            multiline: False
+            hint_text: 'YYYY-MM-DD'
+            on_text: app.update_current_date(self.text)
+
+        Button:
+            text: 'Выбрать'
+            size_hint_x: None
+            width: '100dp'
+            on_press: app.open_date_picker()
+
+    Label:
+        text: 'Учет Позитивных Эмоций'
+        font_size: '24dp'
+        size_hint_y: None
+        height: '50dp'
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
+
+    ScrollView:
+        GridLayout:
+            id: emotions_list
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: '10dp'
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: '50dp'
+        spacing: '10dp'
+
+        Button:
+            text: 'Посмотреть Статистику'
+            on_press: app.show_statistics()
+
+        Button:
+            text: 'Очистить Статистику'
+            background_color: (1, 0, 0, 1)
+            on_press: app.confirm_clear_statistics()
