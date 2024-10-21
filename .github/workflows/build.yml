@@ -3,7 +3,7 @@ name: Build APK
 on:
   push:
     branches:
-      - main  # Или ваша основная ветка, например, master
+      - main  # Або ваша основна гілка
 
 jobs:
   build:
@@ -16,7 +16,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.12'  # Укажите версию Python, совместимую с вашим проектом
+          python-version: '3.12'  # Або ваша версія Python
+
+      - name: Remove build directories (if any)
+        run: |
+          rm -rf .buildozer/
 
       - name: Install dependencies
         run: |
